@@ -1,0 +1,22 @@
+[Unit]
+Description=Chia Pool
+Wants=network-online.target
+After=network.target network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+ENVIRONMENT="VIRTUAL_ENV=/home/ewaldo/pool-reference/venv"
+ENVIRONMENT="PATH=/home/ewaldo/pool-reference/venv/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games"
+
+Restart=always
+RestartSec=1
+User=ewaldo
+Group=ewaldo
+
+WorkingDirectory=/home/ewaldo/pool-reference
+Environment=PATH=/home/ewaldo/pool-reference/venv/bin:${PATH}
+ExecStart=/home/ewaldo/pool-reference/venv/bin/python -m pool
+
+[Install]
+WantedBy=multi-user.target
+

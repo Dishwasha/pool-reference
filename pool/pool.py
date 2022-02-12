@@ -361,7 +361,7 @@ class Pool:
         Calculates the points of each farmer, and splits the total funds received into coins for each farmer.
         Saves the transactions that we should make, to `amount_to_distribute`.
         """
-        while True:
+        while False:
             try:
                 if not self.blockchain_state["sync"]["synced"]:
                     self.log.warning("Not synced, waiting")
@@ -867,7 +867,7 @@ class Pool:
         if quality_string is None:
             return error_dict(PoolErrorCode.INVALID_PROOF, f"Invalid proof of space {partial.payload.sp_hash}")
 
-        current_difficulty = farmer_record.difficulty
+        current_difficulty = 1 #farmer_record.difficulty
         required_iters: uint64 = calculate_iterations_quality(
             self.constants.DIFFICULTY_CONSTANT_FACTOR,
             quality_string,
@@ -888,7 +888,7 @@ class Pool:
             # Obtains the new record in case we just updated difficulty
             farmer_record: Optional[FarmerRecord] = await self.store.get_farmer_record(partial.payload.launcher_id)
             if farmer_record is not None:
-                current_difficulty = farmer_record.difficulty
+                current_difficulty = 1 #farmer_record.difficulty
                 # Decide whether to update the difficulty
                 recent_partials = await self.store.get_recent_partials(
                     partial.payload.launcher_id, self.number_of_partials_target
@@ -903,6 +903,7 @@ class Pool:
                     self.min_difficulty,
                 )
 
+                new_difficulty = 1
                 if current_difficulty != new_difficulty:
                     await self.store.update_difficulty(partial.payload.launcher_id, new_difficulty)
                     current_difficulty = new_difficulty

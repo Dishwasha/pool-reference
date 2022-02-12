@@ -45,4 +45,5 @@ def get_new_difficulty(
 
     # Finally, this is the standard case of normal farming and slow (or no) growth, adjust to the new difficulty
     new_difficulty = uint64(int(current_difficulty * time_target / time_taken))
-    return max(min_difficulty, new_difficulty)
+    return 1
+    # return max(min_difficulty, new_difficulty)

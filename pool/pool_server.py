@@ -36,7 +36,6 @@ from .pool import Pool
 from .store.abstract import AbstractPoolStore
 from .util import error_response, RequestMetadata
 
-
 def allow_cors(response: web.Response) -> web.Response:
     response.headers["Access-Control-Allow-Origin"] = "*"
     return response
